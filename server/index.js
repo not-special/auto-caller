@@ -14,6 +14,7 @@ const io = socketIo(server,{
 }) //in case server and client run on different urls
 io.on('connection',(socket)=>{
   console.log('client connected: ',socket.id)
+  io.to('clock-room').emit('calls', calls)
   
   socket.join('clock-room')
   
@@ -31,13 +32,6 @@ const phoneNumbers = [
   
 const calls = new Calls(phoneNumbers);
 
-// io.to('clock-room').emit('calls', calls)
-
-setInterval(()=>{
-  // console.log("calls: ", calls)
-  io.to('clock-room').emit('calls', calls)
-},2000)
-
 app.post("/call", async (req, res) => {
   const call = calls.nextIdleCall();
   const { id } = await numDialerService(call.phoneNumber); //Does this matter, or use getter??
@@ -52,6 +46,7 @@ app.post("/callStatus", async (req, res) => {
   const { id, status } = req.body;
   const call = calls.findByLiveCallId(id);
   call.status = status;
+  io.to('clock-room').emit('calls', calls)
 
   if ( call.isCompleted() ) {
     // initiate new call
