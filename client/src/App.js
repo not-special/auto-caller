@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {io} from 'socket.io-client'
 import Calls from './components/Calls';
-import { initiateCalls } from './services/callService';
+import { initiateCalls, resetCalls } from './services/callService';
 
 const App= ()=> {
   const [calls, setCalls] = useState([]);
@@ -21,17 +21,26 @@ const App= ()=> {
  
   },[])
 
- const handleButtonClick = () => {
+ const handleCallButtonClick = () => {
   initiateCalls();
  }
 
- const showButton = () => {
-  return calls.length > 0 && !calls.find(c => c.status !== "idle")
+ const handleResetCallsButtonClick = () => {
+  resetCalls();
+ }
+
+ const showCallButton = () => {
+  return calls.length > 0 && !calls.find(c => c.status !== "idle");
+ }
+
+ const showResetCallsButton = () => {
+  return calls.length > 0 && !calls.find(c => c.status !== "completed");
  }
 
  return (
    <div className="App">
-    { showButton() ? <button onClick={handleButtonClick}>Call!</button> : "" }
+    { showCallButton() ? <button onClick={handleCallButtonClick}>Call!</button> : ""}
+    { showResetCallsButton() ? <button onClick={handleResetCallsButtonClick}>Reset</button> : ""}
     <Calls calls={calls}/>
    </div>
  )

@@ -27,6 +27,10 @@ class Calls {
       await call.dial();
     }
   }
+
+  reset() {
+    this.calls.forEach(c => c.status = "idle");
+  }
 }
 
 module.exports = Calls;

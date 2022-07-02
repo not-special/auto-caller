@@ -11,7 +11,9 @@ class Call {
   }
 
   setStatus(newStatus) {
-    this.status = newStatus;
+    if (!(this.status === "completed" && newStatus !== "idle")) {
+      this.status = newStatus;
+    }
   }
 
   isCompleted() {

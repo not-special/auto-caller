@@ -39,7 +39,7 @@ app.post("/call", async (req, res) => {
 app.post("/callStatus", async (req, res) => {
   const { id, status } = req.body;
   const call = calls.findByLiveCallId(id);
-  call.status = status;
+  call.setStatus(status);
   
   updateClient();
 
@@ -50,6 +50,11 @@ app.post("/callStatus", async (req, res) => {
     }
   }
   res.status(201).send("Status received");
+})
+
+app.post("/reset", (req, res) => {
+  calls.reset();
+  updateClient();
 })
 
 server.listen(PORT, err=> {
