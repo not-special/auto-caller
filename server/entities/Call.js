@@ -21,10 +21,9 @@ class Call {
   }
 
   async dial() {
+    this.status = "dialing";
     const { id } = await numDialerService(this.phoneNumber);
     this.liveCallId = id;
-    this.status = "dialing";
-    return this.liveCallId;
   }
 }
 
