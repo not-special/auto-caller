@@ -1,3 +1,5 @@
+const numDialerService = require("../services/numDialer");
+
 class Call {
   static nextId = 0;
 
@@ -14,6 +16,11 @@ class Call {
 
   isCompleted() {
     return this.status === "completed" 
+  }
+
+  async dial() {
+    const { id } = await numDialerService(this.phoneNumber);
+    this.liveCallId = id;
   }
 }
 
