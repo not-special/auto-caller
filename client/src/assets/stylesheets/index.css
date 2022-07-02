@@ -1,0 +1,30 @@
+@import 'whitespace-reset.css';
+
+html {
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+button {
+  margin: 10px;
+}
+
+ul {
+  margin: 10px;
+}
+
+.dialing {
+  color: rgb(167, 118, 190)
+}
+
+.ringing {
+  color: rgb(69, 65, 126);
+}
+
+.answered {
+  color: rgb(71, 136, 129);
+}
+
+.completed {
+  color: rgb(64, 151, 64);
+}
+

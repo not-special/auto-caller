@@ -22,7 +22,7 @@ class Calls {
   }
 
   async initiateCalls() {
-    for (let i = 1; i <= maxConcurrentCalls; i++) {
+    for (let i = 1; i <= Calls.maxConcurrentCalls; i++) {
       const call = this.nextIdleCall();
       await call.dial();
     }

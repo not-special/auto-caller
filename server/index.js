@@ -39,8 +39,6 @@ app.post("/call", async (req, res) => {
 app.post("/callStatus", async (req, res) => {
   const { id, status } = req.body;
   const call = calls.findByLiveCallId(id);
-  console.log(`liveCallId: ${id}`);
-  console.log(calls);
   call.status = status;
   
   updateClient();

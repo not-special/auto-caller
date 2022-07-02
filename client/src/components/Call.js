@@ -1,7 +1,7 @@
-const Call = ({ call }) => {
+const Call = ({ call }) => {  
   return (
     <li>
-      {call.phoneNumber}: {call.status}
+      {call.phoneNumber}: <span className={call.status}>{call.status}</span>
     </li>
   )
 }
