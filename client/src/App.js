@@ -25,9 +25,13 @@ const App= ()=> {
   initiateCalls();
  }
 
+ const showButton = () => {
+  return calls.length > 0 && !calls.find(c => c.status !== "idle")
+ }
+
  return (
    <div className="App">
-    <button onClick={handleButtonClick}>Call!</button>
+    { showButton() ? <button onClick={handleButtonClick}>Call!</button> : "" }
     <Calls calls={calls}/>
    </div>
  )
