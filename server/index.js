@@ -16,8 +16,8 @@ const io = socketIo(server,{
 
 io.on('connection',(socket)=>{
   console.log('client connected: ',socket.id);
-  socket.join('clock-room');
-  io.to('clock-room').emit('calls', calls);
+  socket.join('call-room');
+  io.to('call-room').emit('calls', calls);
   socket.on('disconnect',(reason)=>{
     console.log(reason);
   })
@@ -28,7 +28,7 @@ app.use(express.json());
 const calls = new Calls();
 
 const updateClient = () => {
-  io.to('clock-room').emit('calls', calls);
+  io.to('call-room').emit('calls', calls);
 }
 
 app.post("/call", async (req, res) => {
