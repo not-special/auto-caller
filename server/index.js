@@ -32,13 +32,15 @@ const updateClient = () => {
 }
 
 app.post("/call", async (req, res) => {
-  calls.nextIdleCall().dial();
+  calls.initiateCalls();
   res.status(201).send("Call initiated");
 })
 
 app.post("/callStatus", async (req, res) => {
   const { id, status } = req.body;
   const call = calls.findByLiveCallId(id);
+  console.log(`liveCallId: ${id}`);
+  console.log(calls);
   call.status = status;
   
   updateClient();
@@ -53,6 +55,6 @@ app.post("/callStatus", async (req, res) => {
 })
 
 server.listen(PORT, err=> {
-  if(err) console.log(err)
-  console.log('Server running on Port ', PORT)
+  if(err) console.log(err);
+  console.log('Server running on Port ', PORT);
 })
